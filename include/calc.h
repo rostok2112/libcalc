@@ -1,5 +1,5 @@
-#ifndef TYPES_H_INCLUDED
-#define TYPES_H_INCLUDED
+#ifndef CALC_H_INCLUDED
+#define CALC_H_INCLUDED
 
 #define CONTINUE_WITH_CACHE NULL
 #define FREE_CACHE (char []){-1}
@@ -14,4 +14,4 @@ double stackMachine(double, TokenArr_t *);
 
 double calculateFromStr(double, char *);
 
-#endif // TYPES_H_INCLUDED
+#endif // CALC_H_INCLUDED
