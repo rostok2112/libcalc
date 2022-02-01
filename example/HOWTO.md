@@ -60,8 +60,8 @@ function **calculateFromStr()** - an easy to use wrapper. **strtok()**-like inte
 **Cast_t** - Union. Type that needs to push inside the stack values of double/int/char etc. types
 #### Fields
 >- double d
->- long long int li;
->- float f;
->- int i;
->- short s;
->- char c;
+>- long long int li
+>- float f
+>- int i
+>- short s
+>- char c
