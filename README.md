@@ -25,3 +25,5 @@ Compile example with this lib:
 ```
 gcc somesource.c -lm -lcalc -lstack -L../../lib -I../../include
 ```
+
+Examples of usage inside example/ dir
