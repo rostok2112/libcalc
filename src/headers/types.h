@@ -7,13 +7,15 @@
 #include <math.h>
 #include <stack.h>
 
-typedef struct Token{
+#define CONTINUE_WITH_CACHE NULL
+
+typedef struct Token {
     char *token;
     int type:4,
         prio:3;
 } Token_t;
 
-typedef struct TokenArr{
+typedef struct TokenArr {
     Token_t *tokens;
     int capacity;
 } TokenArr_t;
@@ -24,7 +26,7 @@ typedef union Cast {
     float f;
     int i;
     short s;
-    char c
+    char c;
 } Cast_t;
 
 TokenArr_t *_strtok(char *);

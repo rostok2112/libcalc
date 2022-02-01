@@ -259,5 +259,5 @@ double calculateFromStr(double x, char *strWithExpression)
         return stackMachine(x, expressionArr);
 
     return 0;
-#undef IS_NEEDED_FREE(strWithExpression)
+#undef IS_NEEDED_FREE
 }
