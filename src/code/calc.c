@@ -1,19 +1,5 @@
 #include "../headers/types.h"
 
-#define ARGUMENT 0
-#define INT_DIGIT 1
-#define FLOAT_DIGIT 2
-#define FUNCTION 3
-#define OPERATOR 4
-#define OPENING_BRACKET 5
-#define CLOSING_BRACKET 6
-
-#define NO_PRIO -1
-#define LOWEST_PRIO 0
-#define AVARAGE_PRIO 1
-#define HIGH_PRIO 2
-#define HIGHEST_PRIO 3
-
 /*Math expression parser to tokens*/
 TokenArr_t *_strtok(char *inputStr)
 {
