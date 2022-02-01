@@ -1,4 +1,4 @@
-# How to. Simple guide.
+# How to. Simple guide and docs.
 ## Functions
 ### _strtok()
 function 	**_strtok()** - parser of math expressions. Takes a string with math expressions, parses  math operators, forms and return an array of tokens with this operators
@@ -40,7 +40,7 @@ function **calculateFromStr()** - an easy to use wrapper. **strtok()**-like inte
 **Token_t** - type that contains single math expression/operator
 #### Fields
 >- char token[] - null-terminated string. Introduce how math operator looks
->- int type:4 - bit field that contain id of type of math operator
+>- int type: 4 - bit field that contain id of type of math operator
 > Possible values:
 >>- ARGUMENT - argument x
 >>- INT_DIGIT - integer number
@@ -49,7 +49,7 @@ function **calculateFromStr()** - an easy to use wrapper. **strtok()**-like inte
 >>- OPERATOR - math operator like + - * / etc.
 >>- OPENING_BRACKET - (
 >>- CLOSING_BRACKET - )
->- int prio:4 - bit field that contain priority of math operator/function
+>- int prio: 3 - bit field that contain priority of math operator/function
 > Possible values:
 >>- NO_PRIO - no priority. For numbers and brackets etc.
 >>- LOWEST_PRIO - the lowest priority. For + - etc.
