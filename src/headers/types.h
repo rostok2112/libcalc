@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stack.h>
 
 typedef struct Token{
     char *token;
