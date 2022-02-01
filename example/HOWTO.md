@@ -23,7 +23,7 @@ function **stackMachine()** - stack calculator. Takes an array of tokens with ma
 function **calculateFromStr()** - an easy to use wrapper. **strtok()**-like interface for interaction with lib. Takes a string with math expressions and value of argument x and returns calculated value for expression in string. Also has internal cache. 
 #### Arguments
 >- char expressionStr[] - null-terminated string with any count of separators. Contain math expression.
-> Possible values:
+> ##### Possible values:
 >>- char str[] - compute and cache arr of tokens in RPN (if already arr cached, old cache will be freed)
 >>- CONTINUE_WITH_CACHE - continue compute by using cached arr
 >>- FREE_CACHE = frees a cached arr
@@ -41,7 +41,7 @@ function **calculateFromStr()** - an easy to use wrapper. **strtok()**-like inte
 #### Fields
 >- char token[] - null-terminated string. Introduce how math operator looks
 >- int type: 4 - bit field that contain id of type of math operator
-> Possible values:
+> ##### Possible values:
 >>- ARGUMENT - argument x
 >>- INT_DIGIT - integer number
 >>- FLOAT_DIGIT - float number
@@ -50,7 +50,7 @@ function **calculateFromStr()** - an easy to use wrapper. **strtok()**-like inte
 >>- OPENING_BRACKET - (
 >>- CLOSING_BRACKET - )
 >- int prio: 3 - bit field that contain priority of math operator/function
-> Possible values:
+> ##### Possible values:
 >>- NO_PRIO - no priority. For numbers and brackets etc.
 >>- LOWEST_PRIO - the lowest priority. For + - etc.
 >>- AVARAGE_PRIO - avarage priority. For * /  etc.
