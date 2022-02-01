@@ -3,21 +3,25 @@ Simple library with parser of mathematical expressions and operators from string
 
 ## Depends
 
-You need to compile a stack lib from: 
+You need  a stack lib from: 
 ```
 https://github.com/rostok2112/libstack.git
-```
-Just link compiled lib to linker and move header of lib (stack.h) to include/ and static lib to lib/
+``` 
+Also you need a standart C math lib 
 
 ## Compile
 
 Just run in src/code
 ```
-gcc -c calc.c -o calc.o -L../../lib/ -lstack -I../../include/
+gcc -c calc.c -o calc.o -I../../include/
 ar rc libcalc.a calc.o
 ```
 
 ## Usage 
 
-Just include calc.h from include/ and link  libcalc.a
+Just move calc.h from include/ to include/ dir and move libcalc.a to lib/ dir of your project
 
+Compile example with this lib: 
+```
+gcc somesource.c -lm -lcalc -lstack -L../../lib -I../../include
+```
