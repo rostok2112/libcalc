@@ -11,7 +11,7 @@ Also you need a standart C math lib
 
 ## Compile
 
-Just run in src/code
+Just run in **src/code**
 ```
 gcc -c calc.c -o calc.o -I../../include/
 ar rc libcalc.a calc.o
@@ -19,11 +19,11 @@ ar rc libcalc.a calc.o
 
 ## Usage 
 
-Just move calc.h from include/ to include/ dir and move libcalc.a to lib/ dir of your project
+Just move **calc.h** from **export/** to **include/** dir and move **libcalc.a** to **lib/** dir of your project
 
 Compile example with this lib: 
 ```
 gcc somesource.c -lm -lcalc -lstack -L../../lib -I../../include
 ```
 
-Examples of usage inside example/ dir
+Examples of usage and docs inside **example/** dir

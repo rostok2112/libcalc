@@ -2,6 +2,7 @@
 bin/
 obj/
 lib/
+include/
 share/
 
 #Temp files
