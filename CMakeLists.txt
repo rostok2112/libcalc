@@ -24,7 +24,7 @@ execute_process(  #start shell script of build depend
     WORKING_DIRECTORY ${${DEP_NAME}_SOURCE_DIR}
 )
 
-
+file(MAKE_DIRECTORY ${ROOT_DIR}/lib) # make lib dir
 configure_file(${${DEP_NAME}_SOURCE_DIR}/export/${DEP_NAME}.h ${ROOT_DIR}/include COPYONLY) #copy headers to include/ directory
 configure_file(${${DEP_NAME}_SOURCE_DIR}/export/lib${DEP_NAME}.a ${ROOT_DIR}/lib COPYONLY) #copy lib to lib/ directory 
 
