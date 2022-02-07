@@ -1,4 +1,4 @@
-#include "../headers/types.h"
+#include <types.h>
 
 /*Math expression parser to tokens*/
 TokenArr_t *_strtok(char *inputStr)
@@ -153,97 +153,65 @@ double stackMachine(double x, TokenArr_t * expressionArr)
 {
     Stack_t *head = NULL;
     double temp = 0;
-    Cast_t * castUnion = NULL; // Used for unify stack. For contain double/int in void *
+    Cast_t *castUnion = NULL; // Used for unify stack. For contain double/int in void *
     /*
       If you want you can use *(void **)&x: Only for 64 bit systems. Type punning. Double cast to void * (void * will contain double value)
       instead of Cast_t union
     */
 
     for(int i = 0; i < expressionArr->capacity; i++, temp = 0) {
-        castUnion = malloc(sizeof(Cast_t));
+        castUnion = new_cast();
         switch(expressionArr->tokens[i].type) {
             case ARGUMENT:
-                castUnion->d = x;
+                 *(double *)castUnion = x;
                 break;
             case INT_DIGIT:
                 ;
             case FLOAT_DIGIT:
-                castUnion->d = atof(expressionArr->tokens[i].token);
+                *(double *)castUnion = atof(expressionArr->tokens[i].token);
                 break;
             case FUNCTION:
                 if(!strcmp(expressionArr->tokens[i].token, "sin"))
-                    castUnion->d = sin(*(double *)stack_pop(&head));
+                    *(double *)castUnion = sin(*(double *)stack_pop(&head));
                 else if(!strcmp(expressionArr->tokens[i].token, "cos"))
-                    castUnion->d = cos(*(double *)stack_pop(&head));
+                    *(double *)castUnion = cos(*(double *)stack_pop(&head));
                 else if(!strcmp(expressionArr->tokens[i].token, "tg"))
-                    castUnion->d = tan(*(double *)stack_pop(&head));
+                    *(double *)castUnion = tan(*(double *)stack_pop(&head));
                 else if(!strcmp(expressionArr->tokens[i].token, "sqrt"))
-                    castUnion->d = sqrt(*(double *)stack_pop(&head));
+                    *(double *)castUnion = sqrt(*(double *)stack_pop(&head));
                 else if(!strcmp(expressionArr->tokens[i].token, "abs"))
-                    castUnion->d = fabs(*(double *)stack_pop(&head));
+                    *(double *)castUnion = fabs(*(double *)stack_pop(&head));
                 else if(!strcmp(expressionArr->tokens[i].token, "ln"))
-                    castUnion->d = log(*(double *)stack_pop(&head));
+                    *(double *)castUnion = log(*(double *)stack_pop(&head));
                 else if(!strcmp(expressionArr->tokens[i].token, "exp"))
-                    castUnion->d = exp(*(double *)stack_pop(&head));
+                    *(double *)castUnion = exp(*(double *)stack_pop(&head));
                 break;
             case OPERATOR:
                 switch(expressionArr->tokens[i].token[0]) {
                     case '+':
-                        castUnion->d = *(double *)stack_pop(&head) + *(double *)stack_pop(&head);
+                        *(double *)castUnion = *(double *)stack_pop(&head) + *(double *)stack_pop(&head);
                         break;
                     case '-':
                         temp = *(double *)stack_pop(&head);
-                        castUnion->d =  *(double *)stack_pop(&head) - temp;
+                        *(double *)castUnion =  *(double *)stack_pop(&head) - temp;
                         break;
                     case '*':
-                        castUnion->d =  *(double *)stack_pop(&head) * *(double *)stack_pop(&head);
+                        *(double *)castUnion =  *(double *)stack_pop(&head) * *(double *)stack_pop(&head);
                         break;
                     case '/':
                         temp = *(double *)stack_pop(&head);
-                        castUnion->d =  *(double *)stack_pop(&head) / temp;
+                        *(double *)castUnion =  *(double *)stack_pop(&head) / temp;
                         break;
                     case '%':
                         temp = *(double *)stack_pop(&head);
-                        castUnion->d = fmod(*(double *)stack_pop(&head), temp);
+                        *(double *)castUnion = fmod(*(double *)stack_pop(&head), temp);
                         break;
                     case '^':
                         temp = *(double *)stack_pop(&head);
-                        castUnion->d = pow(*(double *)stack_pop(&head), temp);
+                        *(double *)castUnion = pow(*(double *)stack_pop(&head), temp);
                 }
         }
         stack_push(&head, castUnion);
     }
     return *(double *)stack_pop(&head);
-}
-
-/*
-    strtok like interface to interact with lib:
-        - x: argument;
-        - strWithExpression: string with math expression. Possible values:
-            - string = compute and cache arr of tokens in RPN (if already arr cached, old cache will be freed);
-            - CONTINUE_WITH_CACHE = continue use cached arr;
-            - FREE_CACHE = frees a cached arr.
-*/
-double calculateFromStr(double x, char *strWithExpression)
-{
-#define IS_NEEDED_FREE(strWithExpression) strWithExpression[0] != -1
-    static TokenArr_t *expressionArr = NULL;
-
-    if(strWithExpression != CONTINUE_WITH_CACHE) {
-        if(expressionArr) {
-            for(int i = 0; i < expressionArr->capacity; i++)
-                free(expressionArr->tokens[i].token);
-            free(expressionArr->tokens);
-            free(expressionArr);
-            expressionArr = NULL;
-        }
-        if(!IS_NEEDED_FREE(strWithExpression)) {
-            expressionArr = rpnTranslator(_strtok(strWithExpression));
-            return stackMachine(x, expressionArr);
-        }
-    } else  if(strWithExpression == CONTINUE_WITH_CACHE && expressionArr)
-        return stackMachine(x, expressionArr);
-
-    return 0;
-#undef IS_NEEDED_FREE
 }

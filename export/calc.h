@@ -6,7 +6,6 @@
 
 typedef struct Token Token_t;
 typedef struct TokenArr TokenArr_t;
-typedef union Cast  Cast_t;
 
 TokenArr_t *_strtok(char *);
 TokenArr_t *rpnTranslator(TokenArr_t *);

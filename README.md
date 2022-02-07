@@ -1,29 +1,41 @@
 # libcalc
 Simple library with parser of mathematical expressions and operators from string (returns array of tokens with math expressions), translator  to RPN and stack calculator. Also this lib contain simple strtok-like wrapper for calculations
 
+## Tools
+
+GCC and Make
+```
+sudo apt install build-essential
+```
+CMake
+```
+sudo apt install cmake
+```
+
 ## Depends
 
-You need  a stack lib from: 
+Stack lib from: 
 ```
 https://github.com/rostok2112/libstack.git
 ``` 
-Also you need a standart C math lib 
+Standart **C math lib** 
 
 ## Compile
 
-Just run in **src/code**
+Just run 
 ```
-gcc -c calc.c -o calc.o -I../../include/
-ar rc libcalc.a calc.o
+sh build.sh 
 ```
 
 ## Usage 
 
 Just move **calc.h** from **export/** to **include/** dir and move **libcalc.a** to **lib/** dir of your project
+ 
+Also always link C math lib by **-lm** flag 
 
 Compile example with this lib: 
 ```
-gcc somesource.c -lm -lcalc -lstack -L../../lib -I../../include
+gcc somesource.c -lm -lcalc -L./lib -I./include
 ```
 
 Examples of usage and docs inside **example/** dir

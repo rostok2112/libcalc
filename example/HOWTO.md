@@ -1,26 +1,26 @@
 # How to. Simple guide and docs.
-## Functions
+## Functions and methods
 ### _strtok()
-function 	**_strtok()** - parser of math expressions. Takes a string with math expressions, parses  math operators, forms and return an array of tokens with this operators
+Function 	**_strtok()** - parser of math expressions. Takes a string with math expressions, parses  math operators, forms and return an array of tokens with this operators
 #### Arguments:
 >- char expressionStr[] - null-terminated string with any count of separators. Contain math expression
 #### Return value:
->- TokenArr_t tokenArr[] 
+>- TokenArr_t tokenArr[]  - array of tokens with math operators
 ### rpnTranslator()
-function **rpnTranslator()** - translator from infix notation to postfix. Takes an array of tokens with math operators and returns  this array in reverse Poland notation 
+Function **rpnTranslator()** - translator from infix notation to postfix. Takes an array of tokens with math operators and returns  this array in reverse Poland notation 
 #### Arguments:
->- TokenArr_t inputTokenArr[]
+>- TokenArr_t inputTokenArr[] - array of tokens with math operators
 #### Return value
 >- TokenArr_t outputTokenArr[] - in RPN
 ### stackMachine()
-function **stackMachine()** - stack calculator. Takes an array of tokens with math operators in RPN and value of argument x and  returns  calculated value for math expreesion in array of tokens.
+Function **stackMachine()** - stack calculator. Takes an array of tokens with math operators in RPN and value of argument x and  returns  calculated value for math expreesion in array of tokens.
 #### Arguments:
 >- TokenArr_t inputTokenArr[] - in RPN. 
 >- double x - argument
 #### Return value
 >- double result - result of calculation
 ### calculateFromStr()
-function **calculateFromStr()** - an easy to use wrapper. **strtok()**-like interface for interaction with lib. Takes a string with math expressions and value of argument x and returns calculated value for expression in string. Also has internal cache. 
+Function **calculateFromStr()** - an easy to use wrapper. **strtok()**-like interface for interaction with lib. Takes a string with math expressions and value of argument x and returns calculated value for expression in string. Also has internal cache. 
 #### Arguments
 >- char expressionStr[] - null-terminated string with any count of separators. Contain math expression.
 > ##### Possible values:
@@ -30,14 +30,14 @@ function **calculateFromStr()** - an easy to use wrapper. **strtok()**-like inte
 >- double x - argument
 #### Return value
 >- double result - result of calculations
-## Types
+## Types and classes
 ### TokenArr_t
-**TokenArr_t** - type that just implement an array of variable with type **Token_t**
+Class **TokenArr_t** - implements an array of **Token_t** items
 #### Fields
 >- int capacity - capacity of array
 >- Token_t tokens[] - array of tokens
 ### Token_t
-**Token_t** - type that contains single math expression/operator
+Class **Token_t** - contains single math expression/operator
 #### Fields
 >- char token[] - null-terminated string. Introduce how math operator looks
 >- int type: 4 - bit field that contain id of type of math operator
@@ -56,12 +56,3 @@ function **calculateFromStr()** - an easy to use wrapper. **strtok()**-like inte
 >>- AVARAGE_PRIO - avarage priority. For * /  etc.
 >>- HIGH_PRIO - high priority. For ^ etc.
 >>- HIGHEST_PRIO - the highes priority. For functions.
-### Cast_t
-**Cast_t** - Union. Type that needs to push inside the stack values of double/int/char etc. types
-#### Fields
->- double d
->- long long int li
->- float f
->- int i
->- short s
->- char c
