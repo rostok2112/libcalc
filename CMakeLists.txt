@@ -1,9 +1,14 @@
 cmake_minimum_required (VERSION 3.12)
 project(calc LANGUAGES C)
 
+if(NOT TYPE_LIB)
+	set(TYPE_LIB STATIC)
+
 set(CMAKE_BUILD_TYPE Release)
 set(ROOT_DIR ${CMAKE_CURRENT_LIST_DIR})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${ROOT_DIR}/export)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${ROOT_DIR}/export)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${ROOT_DIR}/export)
 set(DEP_NAME stack)
 
 include(FetchContent)
@@ -45,7 +50,7 @@ file(GLOB
 include_directories("${ROOT_DIR}/include") 
 link_directories("${ROOT_DIR}/lib")
 
-add_library(${PROJECT_NAME} STATIC ${CS} ${OS})
+add_library(${PROJECT_NAME} ${TYPE_LIB} ${CS} ${OS})
 
 SET_SOURCE_FILES_PROPERTIES( # for importing object files to compile
   ${OS}
@@ -53,6 +58,3 @@ SET_SOURCE_FILES_PROPERTIES( # for importing object files to compile
   EXTERNAL_OBJECT true
   GENERATED true
 )
-
-
-

@@ -1,3 +1,12 @@
-cmake  -S . -B build/
+type_lib="STATIC"
+if [ -n "$1" ]
+then
+type_lib=$1
+else
+:
+fi
+cmake  -S . -B build/ -DTYPE_LIB=$type_lib
 cd build/
-make 
+make
+cd ../export
+ls

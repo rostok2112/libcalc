@@ -11,6 +11,7 @@ CMake
 ```
 sudo apt install cmake
 ```
+... Or install this tools by yourself
 
 ## Depends
 
@@ -20,12 +21,17 @@ https://github.com/rostok2112/libstack.git
 ``` 
 Standart **C math lib** 
 
-## Compile
+## Build
 
 Just run 
 ```
 sh build.sh 
 ```
+If you need specific type of lib like shared, just run
+```
+sh build.sh SHARED
+``` 
+Or start build.sh by any another way
 
 ## Usage 
 
