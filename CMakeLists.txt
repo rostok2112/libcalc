@@ -3,6 +3,7 @@ project(calc LANGUAGES C)
 
 if(NOT TYPE_LIB)
 	set(TYPE_LIB STATIC)
+endif ()
 
 set(CMAKE_BUILD_TYPE Release)
 set(ROOT_DIR ${CMAKE_CURRENT_LIST_DIR})
