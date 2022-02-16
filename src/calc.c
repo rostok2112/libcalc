@@ -149,11 +149,13 @@ TokenArr_t *rpnTranslator(TokenArr_t *inputTokenArr)
 }
 
 /*Stack calculator */
-double stackMachine(double x, TokenArr_t * expressionArr)
+double stackMachine(double x, TokenArr_t *expressionArr)
 {
     Stack_t *head = NULL;
     double temp = 0;
     Cast_t *castUnion = NULL; // Used for unify stack. For contain double/int in void *
+
+    void *temp_free1 = NULL, *temp_free2 = NULL;
     /*
       If you want you can use *(void **)&x: Only for 64 bit systems. Type punning. Double cast to void * (void * will contain double value)
       instead of Cast_t union
@@ -172,46 +174,59 @@ double stackMachine(double x, TokenArr_t * expressionArr)
                 break;
             case FUNCTION:
                 if(!strcmp(expressionArr->tokens[i].token, "sin"))
-                    *(double *)castUnion = sin(*(double *)stack_pop(&head));
+                    *(double *)castUnion = sin(*(double *) (temp_free1 = stack_pop(&head)));
                 else if(!strcmp(expressionArr->tokens[i].token, "cos"))
-                    *(double *)castUnion = cos(*(double *)stack_pop(&head));
+                    *(double *)castUnion = cos(*(double *)  (temp_free1 = stack_pop(&head) ));
                 else if(!strcmp(expressionArr->tokens[i].token, "tg"))
-                    *(double *)castUnion = tan(*(double *)stack_pop(&head));
+                    *(double *)castUnion = tan(*(double *)(temp_free1 = stack_pop(&head)));
                 else if(!strcmp(expressionArr->tokens[i].token, "sqrt"))
-                    *(double *)castUnion = sqrt(*(double *)stack_pop(&head));
+                    *(double *)castUnion = sqrt(*(double *)(temp_free1 = stack_pop(&head)));
                 else if(!strcmp(expressionArr->tokens[i].token, "abs"))
-                    *(double *)castUnion = fabs(*(double *)stack_pop(&head));
+                    *(double *)castUnion = fabs(*(double *)(temp_free1 = stack_pop(&head)));
                 else if(!strcmp(expressionArr->tokens[i].token, "ln"))
-                    *(double *)castUnion = log(*(double *)stack_pop(&head));
+                    *(double *)castUnion = log(*(double *)(temp_free1 = stack_pop(&head)));
                 else if(!strcmp(expressionArr->tokens[i].token, "exp"))
-                    *(double *)castUnion = exp(*(double *)stack_pop(&head));
+                    *(double *)castUnion = exp(*(double *)(temp_free1 = stack_pop(&head)));
                 break;
             case OPERATOR:
                 switch(expressionArr->tokens[i].token[0]) {
                     case '+':
-                        *(double *)castUnion = *(double *)stack_pop(&head) + *(double *)stack_pop(&head);
+
+                        *(double *)castUnion = *(double *)(temp_free1 = stack_pop(&head)) + *(double *)(temp_free2 = stack_pop(&head));
                         break;
                     case '-':
-                        temp = *(double *)stack_pop(&head);
-                        *(double *)castUnion =  *(double *)stack_pop(&head) - temp;
+                        temp = *(double *)(temp_free1 = stack_pop(&head));
+                        *(double *)castUnion =  *(double *)(temp_free2 = stack_pop(&head)) - temp;
                         break;
                     case '*':
-                        *(double *)castUnion =  *(double *)stack_pop(&head) * *(double *)stack_pop(&head);
+                        *(double *)castUnion =  *(double *)(temp_free1 = stack_pop(&head)) * *(double *)(temp_free2 = stack_pop(&head));
                         break;
                     case '/':
-                        temp = *(double *)stack_pop(&head);
-                        *(double *)castUnion =  *(double *)stack_pop(&head) / temp;
+                        temp = *(double *)(temp_free1 = stack_pop(&head));
+                        *(double *)castUnion =  *(double *)(temp_free2 = stack_pop(&head)) / temp;
                         break;
                     case '%':
-                        temp = *(double *)stack_pop(&head);
-                        *(double *)castUnion = fmod(*(double *)stack_pop(&head), temp);
+                        temp = *(double *)(temp_free1 = stack_pop(&head));
+                        *(double *)castUnion = fmod(*(double *)(temp_free2 = stack_pop(&head)), temp);
                         break;
                     case '^':
-                        temp = *(double *)stack_pop(&head);
-                        *(double *)castUnion = pow(*(double *)stack_pop(&head), temp);
+                        temp = *(double *)(temp_free1 = stack_pop(&head));
+                        *(double *)castUnion = pow(*(double *)(temp_free2 = stack_pop(&head)), temp);
                 }
         }
         stack_push(&head, castUnion);
+
+        if(temp_free1) {
+            free(temp_free1);
+            temp_free1 = NULL;
+        }
+        if(temp_free2) {
+            free(temp_free2);
+            temp_free2 = NULL;
+        }
     }
-    return *(double *)stack_pop(&head);
+    double y = *(double *)(temp_free1 = stack_pop(&head));
+    free(temp_free1);
+
+    return y;
 }

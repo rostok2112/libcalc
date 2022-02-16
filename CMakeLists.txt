@@ -26,7 +26,7 @@ if (NOT ${DEP_NAME}_POPULATED)
 endif ()
 
 execute_process(  #start shell script of build depend
-    COMMAND sh build.sh 
+    COMMAND  sh build.sh
     WORKING_DIRECTORY ${${DEP_NAME}_SOURCE_DIR}
 )
 

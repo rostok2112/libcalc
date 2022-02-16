@@ -7,6 +7,7 @@ int main()
 {
     char *testStr = "2*(cos(x)+sin(x))/sqrt(abs(x-2))";
     double x = -PI;
+
     printf("Expression:\t%s\n\t x = %.64g\n\tResult1 = %.64g\n", testStr, x, calculateFromStr(x, testStr));
     printf("Expression:\t%s\n\t x = %.64g\n\tResult2 = %.64g\n", testStr, x, calculateFromStr(x, CONTINUE_WITH_CACHE)); // continue computes with cached parsed string of math expressions
     calculateFromStr(x, FREE_CACHE); //frees cache
