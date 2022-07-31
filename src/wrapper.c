@@ -29,6 +29,6 @@ double calculateFromStr(double x, char *strWithExpression)
         return stackMachine(x, expressionArr);
     }
 
-    return 0;
+    return NAN; // not a number
 #undef IS_NEEDED_FREE
 }
