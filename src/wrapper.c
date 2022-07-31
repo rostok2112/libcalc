@@ -10,7 +10,7 @@
 */
 double calculateFromStr(double x, char *strWithExpression)
 {
-#define IS_NEEDED_FREE(strWithExpression) strWithExpression[0] != -1
+#define IS_NEEDED_FREE(strWithExpression) (strWithExpression[0] == -1)
     static TokenArr_t *expressionArr = NULL;
 
     if(strWithExpression != CONTINUE_WITH_CACHE) {
@@ -25,8 +25,9 @@ double calculateFromStr(double x, char *strWithExpression)
             expressionArr = rpnTranslator(_strtok(strWithExpression));
             return stackMachine(x, expressionArr);
         }
-    } else  if(strWithExpression == CONTINUE_WITH_CACHE && expressionArr)
+    } else  if(strWithExpression == CONTINUE_WITH_CACHE && expressionArr) {
         return stackMachine(x, expressionArr);
+    }
 
     return 0;
 #undef IS_NEEDED_FREE
