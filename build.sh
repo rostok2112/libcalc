@@ -1,3 +1,5 @@
+#! /bin/bash
+
 type_lib="STATIC"
 if [ -n "$1" ]
 then

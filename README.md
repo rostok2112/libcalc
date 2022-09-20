@@ -27,6 +27,10 @@ Just run
 ```
 sh build.sh 
 ```
+Or
+```
+./build.sh
+```
 If you need specific type of lib like shared, just run
 ```
 sh build.sh SHARED
