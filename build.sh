@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/sh
 
 type_lib="STATIC"
 if [ -n "$1" ]
