@@ -89,7 +89,7 @@ m:
         }
         buffer[m] = '\0';
 
-        tokenArr->tokens[j].token = calloc(m, sizeof(char));
+        tokenArr->tokens[j].token = calloc(m + 1, sizeof(char));
         strcpy(tokenArr->tokens[j].token, buffer);
         memset(buffer, 0, m);
     }
